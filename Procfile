@@ -1,1 +1,1 @@
-worker: java -jar werewolfbot-0.0.1-SNAPSHOT.jar
+worker: java $JAVA_OPTS -jar werewolfbot-0.0.1-SNAPSHOT.jar
