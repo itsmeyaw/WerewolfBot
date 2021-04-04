@@ -4,5 +4,5 @@
       "name": "discord.token",
       "type": "java.lang.String",
       "description": "Description for discord.token."
-  }
-] }
+    },
+  ] }

@@ -1,1 +1,1 @@
-worker: sh target/bin/app
+worker: java -jar werewolfbot-0.0.1-SNAPSHOT.jar
