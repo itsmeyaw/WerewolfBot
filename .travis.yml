@@ -16,5 +16,5 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'CREATE DATABASE WWDatabase;' -U postgres
+  - psql -c 'CREATE DATABASE "WWDatabase";' -U postgres
   - psql -d WWDatabase -U postgres -f sql/setup.sql
