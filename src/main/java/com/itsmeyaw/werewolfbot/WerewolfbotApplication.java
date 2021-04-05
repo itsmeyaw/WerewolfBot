@@ -21,6 +21,7 @@ import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.itsmeyaw.werewolfbot.command", "com.itsmeyaw.werewolfbot.data.server"})
@@ -32,7 +33,13 @@ public class WerewolfbotApplication {
     public static String loginAnnounce(ReadyEvent event) {
         StringBuilder sb = new StringBuilder("\nLogged in!\n");
         sb.append("Username: ").append(event.getSelf().getUsername()).append("#").append(event.getSelf().getDiscriminator()).append("\n");
-        sb.append("Total server: ").append(event.getSelf().getClient().getGuilds().reduce(0, (acc, ignored) -> acc++).block()).append("\n");
+        sb.append("Total server: ")
+                .append(event.getSelf().getClient().getGuilds()
+                        .collect(Collectors.toList())
+                        .blockOptional()
+                        .orElse(List.of())
+                        .size())
+                .append("\n");
         return sb.toString();
     }
 
