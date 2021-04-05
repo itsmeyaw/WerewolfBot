@@ -4,3 +4,20 @@ jdk: openjdk14
 env:
   global:
     - secure: "qycTg8AfkcgNTMKoh6/aGkBUGfbFGtAxsWl/a4hjBrH/B4I9RUV0WDnS5dLS/Zo0G9xJWsq4wSxx1Bnd77ngk5500wVJZFMB9mftTLaT7sVrVcPAQ0aHzBl5jICyu06ftXftaYSEfHS26mkEXXrUrn5yfsJrIn/favtRj7riLNJSE2kpX+Mfozn7BZdkWgco/dkpytl9RFbycviFtsif07sXMbYUPVvFvie1YK3d7a4MZnWWwAg577/DrZJqxIBbiorpposBtJSuMxAIE3/qxcz1Fhp0Nn4GzhAwqUhAAbZfAW0v4s2NAzC0PYUXkBwP0AHWKuEra7Pp3x1jRgDLcq1ioCB/W13In9GtkenFDRRm8c1wXKLS4S+rHY4iuLypDDy8jVZ+nWoMNZ0MNjzKmLVSkr4YFTVMhw209VptKjX9SJbCV1eeY1gZK6DIEQIW7jE8PQyThc6y+mxlNuZCJ6XzMWtZudx+Kap/5p48ROrsH+ffuZQSAEYHsoA80SdizmL6nVjF9CReyccb/IhcF+4vgBAyL628IWenk9JH91rMO3ynZM0U7BdRvaGqnwI/HHFP+4ElLKwX198f4B8CPi9a878vRTLMzByiAAyoapzYEZrCJcacitvj5FKEQ1n1e4trNwfgW6imYHcBITkuMH98tI9lgz+k31NqwiSTxr4="
+
+git:
+  depth: 10
+  quiet: true
+
+os:
+  - linux
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'CREATE DATABASE WWDatabase;' -U postgres
+  - psql -d WWDatabase -U postgres
+  - psql -c 'CREATE TABLE quotes (id BIGSERIAL PRIMARY KEY, snowflake BIGINT, quote VARCHAR(255) NOT NULL, quote_maker VARCHAR(255) NOT NULL);' -U postgres
+  - psql -c 'CREATE TABLE discordserver(snowflake BIGINT PRIMARY KEY UNIQUE, prefix VARCHAR(20) NOT NULL);' -U postgres
+
