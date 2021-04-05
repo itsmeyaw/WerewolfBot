@@ -16,8 +16,5 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'CREATE DATABASE WWDatabase;' -U postgres
-  - psql -d WWDatabase -U postgres
-  - psql -c 'CREATE TABLE quotes (id BIGSERIAL PRIMARY KEY, snowflake BIGINT, quote VARCHAR(255) NOT NULL, quote_maker VARCHAR(255) NOT NULL);' -U postgres
-  - psql -c 'CREATE TABLE discordserver(snowflake BIGINT PRIMARY KEY UNIQUE, prefix VARCHAR(20) NOT NULL);' -U postgres
-
+  - psql -c 'CREATE DATABASE wwdatabase;' -U postgres
+  - psql -d wwdatabase -U postgres -f sql/setup.sql
